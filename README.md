@@ -27,21 +27,22 @@ Footer(꼬릿말 - 생략 가능)
 
 |Type|Explanation|
 |:---|:---|
-|Feat|새로운 기능을 추가
-|Fix|	버그를 고친 경우
-|Chore|	간단한 수정 혹은 빌드 업데이트
-|Design|	사용자 UI 디자인 변경
-|!BREAKING CHANGE|	커다란 API 변경
-|!HOTFIX|	급하게 치명적인 버그를 고쳐야하는 경우
-|Style|	코드에 변화가 없는 수정 (코드 포맷 변경, 세미 콜론 누락, 들여쓰기 등)
-|Refactor|	프로덕션 코드 리팩토링 (결과의 변경 없이 코드의 구조를 재조정 / 가독성을 높여 유지보수를 하는 경우)
-|Comment|	필요한 주석 추가 및 변경
-|Docs|	문서를 수정한 경우
-|Test|	테스트 코드 (테스트 추가/ 테스트 코드 리팩토링) - 프로덕션 코드 변경 없음
-|Build|	빌드 테스트 업데이트, 패키지 매니저 설정 - 프로덕션 코드 변경 없음
-|Rename|	파일 혹은 폴더명을 수정하는 경우
-|Remove|	파일을 삭제하는 경우
-|Move|	코드나 파일을 이동하는 경우
+|:sparkles: Feat|새로운 기능을 추가
+|:bug: Fix|	버그를 고친 경우
+|:adhesive_bandage: Chore|	간단한 수정 혹은 빌드 업데이트
+|:lipstick: Design|	사용자 UI 디자인 변경
+|:boom: BREAKING CHANGE|	커다란 API 변경
+|:ambulance: HOTFIX|	급하게 치명적인 버그를 고쳐야하는 경우
+|:pencil2: Style|	코드에 변화가 없는 수정 (코드 포맷 변경, 세미 콜론 누락, 들여쓰기 등)
+|:art: Refactor|	프로덕션 코드 리팩토링 (결과의 변경 없이 코드의 구조를 재조정 / 가독성을 높여 유지보수를 하는 경우)
+|:bulb: Comment|	필요한 주석 추가 및 변경
+|:memo: Docs|	문서를 수정한 경우
+|:wrench: Config|	
+|:white_check_mark: Test|	테스트 코드 (테스트 추가/ 테스트 코드 리팩토링) - 프로덕션 코드 변경 없음
+|:construction_worker: Build|	빌드 테스트 업데이트, 패키지 매니저 설정 - 프로덕션 코드 변경 없음
+|:truck: Rename|	파일 혹은 폴더명을 수정하는 경우
+|:truck: Move|	코드나 파일을 이동하는 경우
+|:fire: Remove|	파일을 삭제하는 경우
 
 </div>
 </details>
@@ -70,9 +71,9 @@ Footer(꼬릿말 - 생략 가능)
 
 |Type|Explanation|
 |:---|:---|
-|Resolves|이슈 해결
-|Fixes|이슈 수정중
-|Ref|참고할 이슈가 있음
+|:white_check_mark: Resolves|이슈 해결
+|:construction: Fixes|이슈 수정중
+|:mag: Ref|참고할 이슈가 있음
 
 
 </div>
