@@ -1,6 +1,3 @@
-# realtime-troll-filtering
-
-----
 ## Git Commit Message Convention
 
 ```python
