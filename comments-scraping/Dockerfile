@@ -8,4 +8,4 @@ WORKDIR /app
 
 RUN pip install -U pip && pip install -r requirements.txt
 
-ENTRYPOINT ["python3", "comments_scraper,py"]
+ENTRYPOINT ["python3", "comments_scraper.py"]
