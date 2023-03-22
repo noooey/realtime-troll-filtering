@@ -1,8 +1,7 @@
 # Message Consuming on Docker
 
 ## Image Build & Run
-```shell
-# Makefile
+````Makefile
 spark-server:
 	sudo docker compose -p spark-cluster -f docker-compose.yaml
 
