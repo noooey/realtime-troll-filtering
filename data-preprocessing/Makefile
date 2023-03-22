@@ -3,3 +3,5 @@ spark-server:
 
 spark-server-clean:
 	sudo docker compose -p spark-cluster down -v
+	sudo docker rmi -f \
+		spark-cluster-data-preprocessor
