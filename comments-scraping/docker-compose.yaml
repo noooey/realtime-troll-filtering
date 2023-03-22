@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  comments-scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: comments-scraper
+
+networks:
+  default:
+    name: rtf-network
+    external: true
