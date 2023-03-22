@@ -1,16 +1,11 @@
-# Comments Scraping on Docker
+# Youtube Streaming Comments Scraping on Docker
 
-### Image build
-```
-$ sudo docker build -t comments-scraper .
-```
+## Image Build & Run
+```shell
+# Makefile
+api-server:
+	sudo docker compose -p api-server -f docker-compose.yaml
 
-### Check created image
-```
-$ sudo docker image ls
-```
-
-### Run
-```
-$ sudo docker run comments-scraper
+api-server-clean:
+	sudo docker compose -p api-server down -v
 ```

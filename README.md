@@ -33,3 +33,8 @@
 </div>
 
 &nbsp; 
+
+
+---
+
+Kookmin University, 23학년도 1학기 알파프로젝트I, 학생설계형(팀)
