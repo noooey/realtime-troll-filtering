@@ -3,3 +3,5 @@ api-server:
 
 api-server-clean:
 	sudo docker compose -p api-server down -v
+	sudo docker rmi -f \
+		api-server-comments-scraper
