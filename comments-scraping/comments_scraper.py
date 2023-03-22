@@ -19,8 +19,7 @@ chat = pytchat.create(video_id=VIDEO_ID)
 
 # Create a Producer Instance
 producer = KafkaProducer(
-            # bootstrap_servers='localhost:9092',
-            bootstrap_servers='broker:29092',
+            bootstrap_servers=["broker-1:29092", "broker-2:29093", "broker-3:29094"],
             key_serializer = None,
             value_serializer = lambda v: json.dumps(v).encode("utf-8")
             )
