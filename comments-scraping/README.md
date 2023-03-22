@@ -3,7 +3,7 @@
 ## Image Build & Run
 ````Makefile
 api-server:
-	sudo docker compose -p api-server -f docker-compose.yaml
+	sudo docker compose -p api-server -f docker-compose.yaml up
 
 api-server-clean:
 	sudo docker compose -p api-server down -v
