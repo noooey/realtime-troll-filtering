@@ -9,6 +9,7 @@ services:
     environment:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
+
   broker:
     image: confluentinc/cp-kafka:7.3.0
     container_name: broker
@@ -24,3 +25,8 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+  
+networks:
+  default:
+    name: rtf-network
+    # external: true
