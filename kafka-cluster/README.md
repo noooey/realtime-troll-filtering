@@ -2,7 +2,7 @@
 
 ## Compose up
 ```shell
-$ make kafka-serve
+$ make kafka-server
 ```
 
 ## Compose down

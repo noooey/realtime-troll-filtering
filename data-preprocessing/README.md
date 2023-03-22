@@ -2,7 +2,7 @@
 
 ## Compose up
 ```shell
-$ make spark-serve
+$ make spark-server
 ```
 
 ## Compose down
