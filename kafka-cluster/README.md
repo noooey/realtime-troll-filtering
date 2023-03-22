@@ -1,8 +1,7 @@
-# Running Kafka Cluste on Docker
+# Running Kafka Cluster on Docker
 
 ## Image Build & Run
 ```Makefile
-# Makefile
 kafka-server:
 	sudo docker compose -p kafka-cluster -f docker-compose.yaml -d
 
