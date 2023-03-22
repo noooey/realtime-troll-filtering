@@ -1,10 +1,11 @@
-# Message Consuming on Docker
+# Message Consumption on Docker
 
-## Image Build & Run
-````Makefile
-spark-server:
-	sudo docker compose -p spark-cluster -f docker-compose.yaml up
+## Compose up
+```shell
+$ make spark-serve
+```
 
-spark-server-clean:
-	sudo docker compose -p spark-cluster down -v
+## Compose down
+```shell
+$ make spark-server-clean
 ```
