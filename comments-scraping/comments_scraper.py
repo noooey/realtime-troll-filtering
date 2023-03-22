@@ -1,34 +1,42 @@
-import os
 import pytchat # crawling realtime comments
 import pafy # video information
-from dotenv import load_dotenv
-# import pandas as pd
+import json
+from kafka import KafkaProducer
+import configparser
 
-load_dotenv(verbose=True) # return warning message
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-# get api key
-YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
-# set up api key on pafy
+# Get Youtube API key and Video Id
+YOUTUBE_API_KEY = config['youtube']['api_key']
+VIDEO_ID = config['youtube']['video_id']
+
+# Set API key on Pafy
 pafy.set_api_key(YOUTUBE_API_KEY)
 
-# set video id and file path
-video_id = 'FJfwehhzIhw'
-# file_path = './news_ytn_youtube.csv'
+# Create the Pychate Instance
+chat = pytchat.create(video_id=VIDEO_ID)
 
-# create dataframe
-emtpy_frame = pd.DataFrame(columns=['댓글 작성 시간', '댓글 작성자', '댓글 내용'])
+# Create a Producer Instance
+producer = KafkaProducer(
+            # bootstrap_servers='localhost:9092',
+            bootstrap_servers='broker:29092',
+            key_serializer = None,
+            value_serializer = lambda v: json.dumps(v).encode("utf-8")
+            )
 
-# create pychate instance
-chat = pytchat.create(video_id=video_id)
-
+# Scrap Chat data with PytChat
 while chat.is_alive():
     try:
         for c in chat.get().sync_items():
-            print(f"{c.datetime} [{c.author.name}]- {c.message}")
-            data = {'댓글 작성 시간': [c.datetime], '댓글 작성자': [c.author.name], '댓글 내용': [c.message]}
+            data = {
+                "id": c.id,
+                "datetime": c.datetime,
+                "author": c.author.name,
+                "message": c.message
+            }
             print(data)
-            # result = pd.DataFrame(data)
-            # result.to_csv(file_path, mode='a', header=False)
+            producer.send('youtube_comments', data)
     except KeyboardInterrupt:
         chat.terminate()
         break
