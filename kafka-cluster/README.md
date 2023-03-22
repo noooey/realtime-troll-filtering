@@ -1,10 +1,10 @@
 # Running Kafka Cluste on Docker
 
 ## Image Build & Run
-```shell
+```Makefile
 # Makefile
 kafka-server:
-	sudo docker compose -p kafka-cluster -f docker-compose.yaml
+	sudo docker compose -p kafka-cluster -f docker-compose.yaml -d
 
 kafka-server-clean:
 	sudo docker compose -p kafka-cluster down -v
