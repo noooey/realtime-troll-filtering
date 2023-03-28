@@ -13,25 +13,25 @@
 ```shell
 # -- Building the Images
 
-docker build \
+$ docker build \
   -f cluster-base.Dockerfile \
   -t cluster-base .
 
-docker build \
+$ docker build \
   --build-arg spark_version="3.3.2" \
   --build-arg hadoop_version="2" \
   -f spark-base.Dockerfile \
   -t spark-base .
 
-docker build \
+$ docker build \
   -f spark-master.Dockerfile \
   -t spark-master .
 
-docker build \
+$ docker build \
   -f spark-worker.Dockerfile \
   -t spark-worker .
 
-docker build \
+$ docker build \
   --build-arg spark_version="3.3.2" \
   --build-arg jupyterlab_version="2.1.5" \
   -f jupyterlab.Dockerfile \
