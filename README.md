@@ -37,4 +37,4 @@
 
 ---
 
-Kookmin University, 23학년도 1학기 알파프로젝트I, 학생설계형(팀)
+(학생설계형_팀형) Realtime-Troll-Filtering / ANTI-TROLL Team
