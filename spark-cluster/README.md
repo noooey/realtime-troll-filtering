@@ -38,8 +38,6 @@ $ docker build \
   -t jupyterlab .
 ```
 
-
-
 ## 🌟 Compose up
 ```shell
 $ docker-compose up -d
@@ -49,3 +47,9 @@ $ docker-compose up -d
 ```shell
 $ docker-compose down
 ```
+
+## :computer: Web UI
+- **JupyterLab** at *localhost:8888*
+- **Spark master** at *localhost:8080*
+- **Spark worker I** at *localhost:8081*
+- **Spark worker II** at *localhost:8082*
