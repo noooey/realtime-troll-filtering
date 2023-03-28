@@ -8,4 +8,4 @@ WORKDIR /app
 
 RUN pip install -U pip && pip install -r requirements.txt
 
-ENTRYPOINT ["python3", "data_preprocessor.py"]
+ENTRYPOINT ["python3", "-u", "data_preprocessor.py"]
