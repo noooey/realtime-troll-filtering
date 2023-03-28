@@ -2,11 +2,11 @@
 
 ## 🌟 Make Docker Images
 - **Download Docker Files**
-   - cluster-base.DockerFile
-   - spark-base.DockerFile
-   - spark-masker.DockerFile
-   - spark-worker.DockerFile
-   - jupyterlab.DockerFile
+   - cluster-base.Dockerfile
+   - spark-base.Dockerfile
+   - spark-masker.Dockerfile
+   - spark-worker.Dockerfile
+   - jupyterlab.Dockerfile
    - docker-compose.yml
 
 - **Make Images**
@@ -14,27 +14,27 @@
 # -- Building the Images
 
 $ docker build \
-  -f cluster-base.DockerFile \
+  -f cluster-base.Dockerfile \
   -t cluster-base .
 
 $ docker build \
   --build-arg spark_version="3.3.2" \
   --build-arg hadoop_version="2" \
-  -f spark-base.DockerFile \
+  -f spark-base.Dockerfile \
   -t spark-base .
 
 $ docker build \
-  -f spark-master.DockerFile \
+  -f spark-master.Dockerfile \
   -t spark-master .
 
 $ docker build \
-  -f spark-worker.DockerFile \
+  -f spark-worker.Dockerfile \
   -t spark-worker .
 
 $ docker build \
   --build-arg spark_version="3.3.2" \
   --build-arg jupyterlab_version="2.1.5" \
-  -f jupyterlab.DockerFile \
+  -f jupyterlab.Dockerfile \
   -t jupyterlab .
 ```
 
