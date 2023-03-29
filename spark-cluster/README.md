@@ -53,3 +53,8 @@ $ docker-compose down
 - **Spark master** at *localhost:8080*
 - **Spark worker I** at *localhost:8081*
 - **Spark worker II** at *localhost:8082*
+
+## 📝 spark-submit
+```
+$SPARK_HOME/bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2,org.apache.commons:commons-pool2:2.11.1,org.apache.kafka:kafka-clients:2.5.0,org.apache.spark:spark-streaming-kafka-0-10_2.12:3.3.2 streaming.py 
+```
