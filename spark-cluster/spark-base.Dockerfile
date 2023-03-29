@@ -8,6 +8,7 @@ ARG hadoop_version=2
 RUN apt-get update -y && \
     pip3 install --upgrade pip setuptools wheel &&\
     pip3 install pandas &&\
+    pip3 install findspark &&\
     apt-get install -y curl && \
     curl https://archive.apache.org/dist/spark/spark-${spark_version}/spark-${spark_version}-bin-hadoop${hadoop_version}.tgz -o spark.tgz && \
     tar -xf spark.tgz && \
