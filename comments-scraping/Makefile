@@ -1,7 +1,7 @@
 api-server:
-	sudo docker compose -f docker-compose.yaml up
+	docker compose -f docker-compose.yaml up
 
 api-server-clean:
-	sudo docker composedown -v
-	sudo docker rmi -f \
+	docker composedown -v
+	docker rmi -f \
 		youtube-api
