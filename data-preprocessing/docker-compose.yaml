@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: data-preprocessor
+    container_name: spark-client-server
 
 networks:
   default:

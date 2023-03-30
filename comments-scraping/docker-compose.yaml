@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: comments-scraper
+    container_name: api-server
 
 networks:
   default:

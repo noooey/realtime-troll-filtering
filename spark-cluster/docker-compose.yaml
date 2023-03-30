@@ -43,3 +43,8 @@ services:
       - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
+
+networks:
+  default:
+    name: rtf-network
+    external: true

@@ -1,7 +1,7 @@
-spark-server:
-	sudo docker compose -p spark-cluster -f docker-compose.yaml up
+spark-client-server:
+	sudo docker compose -f docker-compose.yaml up
 
-spark-server-clean:
-	sudo docker compose -p spark-cluster down -v
+spark-client-server-clean:
+	sudo docker compose down -v
 	sudo docker rmi -f \
-		spark-cluster-data-preprocessor
+		spark-client-server
