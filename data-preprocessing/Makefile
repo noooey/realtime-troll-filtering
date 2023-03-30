@@ -4,4 +4,4 @@ spark-client-server:
 spark-client-server-clean:
 	sudo docker compose down -v
 	sudo docker rmi -f \
-		spark-client-server
+		spark-client

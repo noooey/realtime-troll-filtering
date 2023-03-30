@@ -2,10 +2,10 @@
 
 ## Compose up
 ```shell
-$ make kafka-server
+$ make kafka-cluster
 ```
 
 ## Compose down
 ```shell
-$ make kafka-server-clean
+$ make kafka-cluster-clean
 ```

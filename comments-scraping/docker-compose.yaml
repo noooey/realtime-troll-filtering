@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api-server
+    container_name: youtube-api
 
 networks:
   default:

@@ -1,5 +1,5 @@
-kafka-server:
+kafka-cluster:
 	sudo docker compose -f docker-compose.yaml up
 
-kafka-server-clean:
+kafka-cluster-clean:
 	sudo docker compose down -v

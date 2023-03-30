@@ -2,10 +2,10 @@
 
 ## Compose up
 ```shell
-$ make spark-server
+$ make spark-client
 ```
 
 ## Compose down
 ```shell
-$ make spark-server-clean
+$ make spark-client-clean
 ```

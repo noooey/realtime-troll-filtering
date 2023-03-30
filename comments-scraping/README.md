@@ -2,10 +2,10 @@
 
 ## Compose up
 ```shell
-$ make api-server
+$ make youtube-api
 ```
 
 ## Compose down
 ```shell
-$ make api-server-clean
+$ make youtube-api-clean
 ```
