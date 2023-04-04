@@ -4,4 +4,4 @@ api-server:
 api-server-clean:
 	docker compose down -v
 	docker rmi -f \
-		youtube-api
+		youtube-api-youtube-api
