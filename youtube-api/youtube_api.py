@@ -32,7 +32,7 @@ while chat.is_alive():
                 "id": c.id,
                 "datetime": c.datetime,
                 "user": c.author.name,
-                "cotent": c.message
+                "content": c.message
             }
             print(data)
             producer.send('youtube_comments', data)
