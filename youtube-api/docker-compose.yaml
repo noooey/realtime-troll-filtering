@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  comments-scraper:
+  youtube-api:
     build:
       context: .
       dockerfile: Dockerfile
