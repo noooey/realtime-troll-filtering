@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  airflow:
+    image: apache/airflow:latest
+    container_name: airflow
+
+networks:
+  default:
+    name: rtf-network
+    external: true

@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  fast-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fast-api
+
+networks:
+  default:
+    name: rtf-network
+    external: true
