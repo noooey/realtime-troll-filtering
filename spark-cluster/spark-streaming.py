@@ -38,15 +38,6 @@ df = spark \
     .option("startingOffsets", "earliest") \
     .load()
 
-# df.awaitTermination()
-
-# Write stream - console
-# df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)") \
-#     .writeStream \
-#     .format("console") \
-#     .outputMode("append") \
-#     .start() \
-#     .awaitTermination()
 df.select(from_json(col("value").cast("string"), SCHEMA).alias("value")) \
     .selectExpr('value.id', 'value.datetime', 'value.user', 'value.content') \
     .writeStream \
