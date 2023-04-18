@@ -3,7 +3,7 @@
 ## 💻 EC2 INSTANCE
 **REGION**: 아시아 태평양 (서울) ap-northeast-2   
 **AMI**: Ubuntu Server 20.04 LTS (HVM), SSD Volume Type   
-**INSTANCE TYPE**: m5.2xlarge (패밀리: m5 / 8 vCPU 32 / GiB 메모리)   
+**INSTANCE TYPE**: m5.2xlarge (패밀리: m5 / 8 vCPU / 32 GiB 메모리)   
 **STORAGE**: 100GIB (gp3)
 
 ## 🕸️ Elastic IP

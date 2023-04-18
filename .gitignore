@@ -1,2 +1,4 @@
 config.ini
 *.pem
+*.pt
+__pycache__
