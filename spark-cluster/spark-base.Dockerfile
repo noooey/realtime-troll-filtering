@@ -19,7 +19,7 @@ RUN apt-get update -y && \
     pip3 install boto3 && \
     pip3 install nltk && \
     pip3 install emoji && \
-    pip3 intsall soynlp && \
+    pip3 install soynlp && \
     apt-get install -y curl && \
     curl https://archive.apache.org/dist/spark/spark-${spark_version}/spark-${spark_version}-bin-hadoop${hadoop_version}.tgz -o spark.tgz && \
     tar -xf spark.tgz && \
