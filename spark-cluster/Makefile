@@ -15,7 +15,6 @@ dependency:
 	docker build --build-arg spark_version="3.3.2" --build-arg hadoop_version="2" -f spark-base.Dockerfile -t spark-base .
 	docker build -f spark-master.Dockerfile -t spark-master .
 	docker build -f spark-worker.Dockerfile -t spark-worker .
-	docker build --build-arg spark_version="3.3.2" --build-arg jupyterlab_version="2.1.5" -f jupyterlab.Dockerfile -t jupyterlab .
 
 # build each images
 cluster-base:
@@ -38,9 +37,3 @@ spark-worker:
 	-f spark-worker.Dockerfile \
   	-t spark-worker .
 
-jupyterlab:
-	docker build \
-	--build-arg spark_version="3.3.2" \
-	--build-arg jupyterlab_version="2.1.5" \
-	-f jupyterlab.Dockerfile \
-	-t jupyterlab .

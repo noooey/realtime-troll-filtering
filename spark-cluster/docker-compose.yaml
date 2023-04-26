@@ -4,13 +4,6 @@ volumes:
     name: "hadoop-distributed-file-system"
     driver: local
 services:
-  jupyterlab:
-    image: jupyterlab
-    container_name: jupyterlab
-    ports:
-      - 8888:8888
-    volumes:
-      - shared-workspace:/opt/workspace
   spark-master:
     image: spark-master
     container_name: spark-master
