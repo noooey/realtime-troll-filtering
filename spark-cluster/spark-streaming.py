@@ -27,12 +27,9 @@ import re
 import emoji
 from soynlp.normalizer import repeat_normalize
 
+import json
 #BERT 모델, Vocabulary 불러오기
 bertmodel, vocab = get_pytorch_kobert_model()
-
-#BERTTokenizer 불러오기
-#tokenizer = get_tokenizer()
-#tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
 max_len = 150
 batch_size = 32
@@ -51,6 +48,19 @@ class BERTDataset(Dataset):
 
     def __len__(self):
         return (len(self.labels))
+
+
+class NpEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        else:
+            return super(NpEncoder, self).default(obj)
+
 
 KAFKA_BOOTSTRAP_SERVERS = "broker-1:29092, broker-2:29093, broker-3:29094"
 KAFKA_TOPIC = "youtube_comments"
@@ -87,6 +97,15 @@ def clean(x):
     return x
 
 
+def getAttr(token_ls):
+    columns = ['token_ids', 'valid_length', 'segment_ids', 'label']
+    for i in range(3):
+        token_ls[i] = token_ls[i].tolist()
+    dic = dict(zip(columns, token_ls))
+    json_val = json.dumps(dic, cls=NpEncoder)
+    return json_val
+
+
 # Define the processing function
 def process(comments):
     comments = clean(comments)
@@ -100,8 +119,7 @@ def process(comments):
     # 토큰화
     data_comments = BERTDataset(comments_tok, 0, 1, tok, max_len, True, False)
 
-#    comments_df = pd.DataFrame(list(data_comments), columns=['token_ids', 'valid_length', 'segment_ids', 'label'])
-#    return comments_df.to_string()
+    return getAttr(list(data_comments[0]))
 
 # Using Spark Structed Streaming
 # Read messages from Kafka Topic and Create Dataframe
@@ -130,4 +148,3 @@ df_processed.writeStream \
     .outputMode("append") \
     .start() \
     .awaitTermination()
-
