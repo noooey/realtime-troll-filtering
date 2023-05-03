@@ -4,18 +4,18 @@
 FROM amd64/python:3.9-slim
 
 # Copy the application files to the container
-COPY inference.py requirements.txt /app/
+COPY inference.py schema.py requirements.txt /app/
 
 # Set the working directory in the container
 WORKDIR /app
 
+# Install git
+RUN apt-get update && apt-get install -y git
+
 # Install the required packages
 RUN pip install -U pip \
-    && pip install -r requirements.txt
-
-# Download the KoBERT model files to the container
-RUN mkdir ./models
-COPY saved_model.pt /app/models/
+    && pip install -r requirements.txt \ 
+    && pip install 'git+https://github.com/SKTBrain/KOBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf'
 
 # Expose the port for the FastAPI application
 EXPOSE 8000
