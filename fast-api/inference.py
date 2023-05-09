@@ -30,8 +30,6 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
     )
     with torch.no_grad():
         sequence_output, pooled_output = model(**{k: torch.tensor(v) for k, v in inputs.items()})
-        # print(pooled_output)
-        test_eval=[]
 
         # Pass the pooled_output through the classifier to obtain the classification result
         classification_result = classifier(pooled_output)
@@ -41,15 +39,14 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
 
         # Print the predicted class
         if predicted_class == 1:
-            test_eval.append("hate")
+            print("hate")
         else:
-            test_eval.append("not hate")
+            print("not hate")
 
-    print(OutputSchema(sentence=input_data.sentence, result=test_eval[0]))
-    return OutputSchema(sentence=input_data.sentence, result=test_eval[0])
+    print(OutputSchema(sentence=input_data.sentence, result=predicted_class))
+    return OutputSchema(sentence=input_data.sentence, result=predicted_class)
 
-
-if __name__ == "__main__":
-    # Run FastAPI locally with uvicorn server
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# if __name__ == "__main__":
+#     # Run FastAPI locally with uvicorn server
+#     import uvicorn
+#     uvicorn.run(app, host="127.0.0.1", port=8000)
