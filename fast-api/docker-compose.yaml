@@ -6,8 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: fast-api
+    ports:
+      - 8080:8000
 
-networks:
-  default:
-    name: rtf-network
-    external: true
+# networks:
+#   default:
+#     name: rtf-network
+#     external: true
