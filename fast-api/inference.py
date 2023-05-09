@@ -1,6 +1,7 @@
 from transformers import BertModel
 from fastapi import FastAPI
 import torch
+import torch.nn as nn
 import numpy as np
 from kobert_tokenizer import KoBERTTokenizer
 from schema import InputSchema, OutputSchema
@@ -8,6 +9,12 @@ from schema import InputSchema, OutputSchema
 tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')  
 model = BertModel.from_pretrained("Haaaaeun/kobert_hatespeech")
 max_seq_length=64
+
+# Add a classification layer on top of the KoBERT model
+classifier = nn.Sequential(
+    nn.Linear(768, 1),
+    nn.Sigmoid()
+)
 
 # Create FastAPI instance
 app = FastAPI()
@@ -23,34 +30,26 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
     )
     with torch.no_grad():
         sequence_output, pooled_output = model(**{k: torch.tensor(v) for k, v in inputs.items()})
-        print(sequence_output)
+        # print(pooled_output)
         test_eval=[]
-        # for i in out:
-        logits=sequence_output
-        probs = logits.sigmoid()
-        print('probs!!!!')
-        print(probs)
-        preds = (probs > 0.5).long()
-        print('preds!!!!')
-        print(preds)
-        preds = preds.detach().cpu().numpy()
-        print(preds.shape)
 
-        if np.argmax(logits) >= 0.5:
-            test_eval.append("부정적")
+        # Pass the pooled_output through the classifier to obtain the classification result
+        classification_result = classifier(pooled_output)
+
+        # Obtain the predicted class
+        predicted_class = torch.round(classification_result).item()
+
+        # Print the predicted class
+        if predicted_class == 1:
+            test_eval.append("hate")
         else:
-            test_eval.append("긍정적")
-    print('**********')
-    print(test_eval)
-    print('**********')
+            test_eval.append("not hate")
+
+    print(OutputSchema(sentence=input_data.sentence, result=test_eval[0]))
     return OutputSchema(sentence=input_data.sentence, result=test_eval[0])
-    # {
-    #     "sentence": input_data.sentence,
-    #     "result": test_eval[0],
-    # }
 
 
-# if __name__ == "__main__":
-#     # Run FastAPI locally with uvicorn server
-#     import uvicorn
-#     uvicorn.run(app, host="127.0.0.1", port=8000)
+if __name__ == "__main__":
+    # Run FastAPI locally with uvicorn server
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
