@@ -43,3 +43,10 @@ $ make spark-submit
 - **Spark master** at [localhost:8080](localhost:8080)
 - **Spark worker I** at [localhost:8081](localhost:8081)
 - **Spark worker II** at [localhost:8082](localhost:8082)
+
+----
+
+# Test on EC2
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{"sentence": "hi"}' http://172.19.0.9:8000/predict
+```
