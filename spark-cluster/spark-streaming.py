@@ -27,39 +27,8 @@ import re
 import emoji
 from soynlp.normalizer import repeat_normalize
 
+import requests
 import json
-#BERT 모델, Vocabulary 불러오기
-bertmodel, vocab = get_pytorch_kobert_model()
-
-max_len = 150
-batch_size = 32
-
-class BERTDataset(Dataset):
-    def __init__(self, dataset, sent_idx, label_idx, bert_tokenizer, max_len,
-                 pad, pair):
-        transform = nlp.data.BERTSentenceTransform(
-            bert_tokenizer, max_seq_length=max_len, pad=pad, pair=pair)
-        length = len(dataset)
-        self.sentences = [transform([i[sent_idx]]) for i in dataset]
-        self.labels = [np.int32(i[label_idx]) for i in dataset]
-
-    def __getitem__(self, i):
-        return (self.sentences[i] + (self.labels[i], ))
-
-    def __len__(self):
-        return (len(self.labels))
-
-
-class NpEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.integer):
-            return int(obj)
-        elif isinstance(obj, np.floating):
-            return float(obj)
-        elif isinstance(obj, np.ndarray):
-            return obj.tolist()
-        else:
-            return super(NpEncoder, self).default(obj)
 
 
 KAFKA_BOOTSTRAP_SERVERS = "broker-1:29092, broker-2:29093, broker-3:29094"
@@ -83,6 +52,16 @@ spark = SparkSession \
 spark.sparkContext.setLogLevel('WARN')
 
 
+# Define the FastAPI endpoint URL
+fastapi_url = "http://172.19.0.9:8000/predict"
+headers = {"Content-Type": "application/json"}
+
+# Define the function to send a request to the FastAPI endpoint
+def send_request(data):
+    response = requests.post(fastapi_url, headers=headers, data=data)
+    return response
+
+
 # 정규화
 emojis = ''.join(emoji.EMOJI_DATA.keys())
 pattern = re.compile(f'[^ .,?!/@$%~％·∼()\x00-\x7Fㄱ-힣{emojis}]+')
@@ -97,29 +76,14 @@ def clean(x):
     return x
 
 
-def getAttr(token_ls):
-    columns = ['token_ids', 'valid_length', 'segment_ids', 'label']
-    for i in range(3):
-        token_ls[i] = token_ls[i].tolist()
-    dic = dict(zip(columns, token_ls))
-    json_val = json.dumps(dic, cls=NpEncoder)
-    return json_val
-
-
 # Define the processing function
 def process(comments):
     comments = clean(comments)
+    json_val = {"sentence":comments}
+    json_val = json.dumps(json_val)
+    send_request(json_val)
+    return comments
 
-    comments_tok = pd.DataFrame([[comments, '0']], columns=['comments', 'label'])
-    comments_tok.to_csv('comments.tsv', sep='\t', encoding='utf-8', index=False)
-    comments_tok = nlp.data.TSVDataset('comments.tsv', field_indices=[0,1], num_discard_samples=1)
-
-    tokenizer = get_tokenizer()
-    tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
-    # 토큰화
-    data_comments = BERTDataset(comments_tok, 0, 1, tok, max_len, True, False)
-
-    return getAttr(list(data_comments[0]))
 
 # Using Spark Structed Streaming
 # Read messages from Kafka Topic and Create Dataframe
@@ -132,7 +96,9 @@ df = spark \
     .option("startingOffsets", "earliest") \
     .load()
 
+
 # Apply processing function to the content column
+# Start the Spark Streaming job and iterate over the output rows
 process_udf = udf(lambda z:process(z), StringType())
 df_processed = df \
     .select(from_json(col("value").cast("string"), SCHEMA).alias("value")) \
@@ -141,8 +107,7 @@ df_processed = df \
     .drop('content') \
     .withColumnRenamed('content_processed', 'content')
 
-# Write processed data to console
-df_processed.writeStream \
+df_processed.writeStream  \
     .format("console") \
     .option("truncate", "false") \
     .outputMode("append") \
