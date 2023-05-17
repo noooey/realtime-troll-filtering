@@ -2,6 +2,8 @@ from transformers import BertModel, AutoTokenizer
 from fastapi import FastAPI
 import torch
 import torch.nn as nn
+import requests
+requests.get('https://www.huggingface.co')
 from schema import InputSchema, OutputSchema
 
 ############# KoBERT #############
@@ -78,7 +80,7 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
     print(OutputSchema(sentence=input_data.sentence, result=predicted_class))
     return OutputSchema(sentence=input_data.sentence, result=predicted_class)
 
-if __name__ == "__main__":
-    # Run FastAPI locally with uvicorn server
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# if __name__ == "__main__":
+#     # Run FastAPI locally with uvicorn server
+#     import uvicorn
+#     uvicorn.run(app, host="127.0.0.1", port=8000)
