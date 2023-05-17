@@ -2,4 +2,5 @@ config.ini
 *.pem
 *.pt
 *.tsv
+.DS_Store
 __pycache__
