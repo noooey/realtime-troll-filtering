@@ -18,18 +18,19 @@ import gluonnlp as nlp
 import numpy as np
 from tqdm import tqdm, tqdm_notebook
 
-#kobert
-from kobert.utils import get_tokenizer
-from kobert.pytorch_kobert import get_pytorch_kobert_model
-
 #regularization
 import re
 import emoji
 from soynlp.normalizer import repeat_normalize
 
-import json
+#kobert
+from kobert.utils import get_tokenizer
+from kobert.pytorch_kobert import get_pytorch_kobert_model
+
 #BERT 모델, Vocabulary 불러오기
 bertmodel, vocab = get_pytorch_kobert_model()
+
+import json
 
 max_len = 150
 batch_size = 32
@@ -108,18 +109,24 @@ def getAttr(token_ls):
 
 # Define the processing function
 def process(comments):
-    comments = clean(comments)
+    comments = [{
+        "sentence" : clean(comments)
+    }]
+    df = spark.createDataFrame(comments)
+    # Convert DataFrame to JSON string
+    json_data = df.toJSON().collect()[0]
 
-    comments_tok = pd.DataFrame([[comments, '0']], columns=['comments', 'label'])
-    comments_tok.to_csv('comments.tsv', sep='\t', encoding='utf-8', index=False)
-    comments_tok = nlp.data.TSVDataset('comments.tsv', field_indices=[0,1], num_discard_samples=1)
+    # comments_tok = pd.DataFrame([[comments, '0']], columns=['comments', 'label'])
+    # comments_tok.to_csv('comments.tsv', sep='\t', encoding='utf-8', index=False)
+    # comments_tok = nlp.data.TSVDataset('comments.tsv', field_indices=[0,1], num_discard_samples=1)
 
-    tokenizer = get_tokenizer()
-    tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
-    # 토큰화
-    data_comments = BERTDataset(comments_tok, 0, 1, tok, max_len, True, False)
+    # tokenizer = get_tokenizer()
+    # tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
+    # # 토큰화
+    # data_comments = BERTDataset(comments_tok, 0, 1, tok, max_len, True, False)
 
-    return getAttr(list(data_comments[0]))
+    # return getAttr(list(data_comments[0]))
+    return json_data
 
 # Using Spark Structed Streaming
 # Read messages from Kafka Topic and Create Dataframe
