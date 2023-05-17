@@ -49,7 +49,7 @@ spark.sparkContext.setLogLevel('WARN')
 
 
 # Define the FastAPI endpoint URL
-fastapi_url = "http://172.19.0.6:8000/predict"
+fastapi_url = "http://172.23.0.0:8000/predict"
 headers = {"Content-Type": "application/json"}
 
 # Define the function to send a request to the FastAPI endpoint

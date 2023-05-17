@@ -8,8 +8,12 @@ services:
     container_name: fast-api
     ports:
       - 8888:8000
+    networks:
+      - rtf-network
 
 networks:
-  default:
-    name: rtf-network
-    external: true
+  rtf-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.23.0.0/16
