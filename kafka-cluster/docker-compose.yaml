@@ -61,3 +61,4 @@ services:
 networks:
   default:
     name: rtf-network
+    external: true

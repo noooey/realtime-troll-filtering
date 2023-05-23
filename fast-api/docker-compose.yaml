@@ -9,10 +9,12 @@ services:
     ports:
       - 8888:8000
     networks:
-      - rtf-network
+      default:
+        ipv4_address: 172.23.0.15
 
 networks:
-  rtf-network:
+  default:
+    name: rtf-network
     ipam:
       driver: default
       config:
