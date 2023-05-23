@@ -8,15 +8,19 @@ from pyspark.sql.functions import udf, col, pandas_udf, split, from_json, expr
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
-# from transformers import AutoTokenizer
-# import torch
-# from torch import nn
-# import torch.nn.functional as F
-# import torch.optim as optim
-# from torch.utils.data import Dataset, DataLoader
-# import gluonnlp as nlp
-# import numpy as np
-# from tqdm import tqdm, tqdm_notebook
+from transformers import AutoTokenizer
+import torch
+from torch import nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+import gluonnlp as nlp
+import numpy as np
+from tqdm import tqdm, tqdm_notebook
+
+#kobert
+from kobert.utils import get_tokenizer
+from kobert.pytorch_kobert import get_pytorch_kobert_model
 
 #regularization
 import re
@@ -49,7 +53,7 @@ spark.sparkContext.setLogLevel('WARN')
 
 
 # Define the FastAPI endpoint URL
-fastapi_url = "http://fast-api:8000/predict"
+fastapi_url = "http://172.23.0.15:8000/predict"
 headers = {"Content-Type": "application/json"}
 
 # Define the function to send a request to the FastAPI endpoint
@@ -77,8 +81,8 @@ def process(comments):
     comments = clean(comments)
     json_val = {"sentence":comments}
     json_val = json.dumps(json_val)
-    response = send_request(json_val)
-    return response.text
+    send_request(json_val)
+    return comments
 
 
 # Using Spark Structed Streaming
@@ -109,3 +113,4 @@ df_processed.writeStream  \
     .outputMode("append") \
     .start() \
     .awaitTermination()
+
