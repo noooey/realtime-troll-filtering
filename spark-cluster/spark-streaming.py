@@ -59,11 +59,10 @@ def clean(x):
     x = repeat_normalize(x, num_repeats=2)
     return x
 
-
 # Define the processing function
-def process(comments):
+def process(ids, comments):
     comments = clean(comments)
-    json_val = {"sentence":comments}
+    json_val = {"id":ids, "sentence":comments}
     json_val = json.dumps(json_val)
     send_request(json_val)
     return comments
@@ -83,11 +82,11 @@ df = spark \
 
 # Apply processing function to the content column
 # Start the Spark Streaming job and iterate over the output rows
-process_udf = udf(lambda z:process(z), StringType())
+process_udf = udf(lambda x,y:process(x,y), StringType())
 df_processed = df \
     .select(from_json(col("value").cast("string"), SCHEMA).alias("value")) \
     .selectExpr('value.id', 'value.datetime', 'value.user', 'value.content') \
-    .withColumn('content_processed', process_udf(col('content'))) \
+    .withColumn('content_processed', process_udf(col('id'), col('content'))) \
     .drop('content') \
     .withColumnRenamed('content_processed', 'content')
 

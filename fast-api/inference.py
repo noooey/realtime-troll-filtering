@@ -8,7 +8,7 @@ from schema import InputSchema, OutputSchema
 
 ############# KoBERT #############
 from kobert_tokenizer import KoBERTTokenizer
-tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')  
+tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
 model = BertModel.from_pretrained("Haaaaeun/kobert_hatespeech")
 ####################################
 
@@ -77,8 +77,8 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
         else:
             print("not hate")
 
-    print(OutputSchema(sentence=input_data.sentence, result=predicted_class))
-    return OutputSchema(sentence=input_data.sentence, result=predicted_class)
+    print(OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class))
+    return OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class)
 
 # if __name__ == "__main__":
 #     # Run FastAPI locally with uvicorn server
