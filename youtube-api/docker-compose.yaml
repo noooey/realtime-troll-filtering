@@ -1,11 +1,23 @@
 version: "3"
 
 services:
-  youtube-api:
+  ytn-news:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: youtube-api
+    container_name: ytn-news
+    environment:
+      VIDEO_ID: "FJfwehhzIhw"
+      KAFKA_TOPIC: "ytn-news"
+  
+  kbs-drama:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kbs-drama
+    environment:
+      VIDEO_ID: "d7BbTmUZO-Y"
+      KAFKA_TOPIC: "kbs-drama"
 
 networks:
   default:

@@ -9,14 +9,20 @@ from pyspark.sql.functions import udf, col, pandas_udf, split, from_json, expr
 #regularization
 import re
 import emoji
+import argparse
 from soynlp.normalizer import repeat_normalize
 
 import requests
 import json
 
+# Parse the command-line arguments
+parser = argparse.ArgumentParser(description='Real-time YouTube comments crawler')
+parser.add_argument('--kafka_topics', type=str, help='Kafka Topics')
+
+args = parser.parse_args()
 
 KAFKA_BOOTSTRAP_SERVERS = "broker-1:29092, broker-2:29093, broker-3:29094"
-KAFKA_TOPIC = "youtube_comments"
+KAFKA_TOPIC = args.kafka_topics  # kafka cluster 내의 모든 topic에서 메세지 가져오도록 설정
 
 # Create Schema
 SCHEMA = StructType([

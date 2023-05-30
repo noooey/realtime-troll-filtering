@@ -8,4 +8,4 @@ WORKDIR /app
 
 RUN pip install -U pip && pip install -r requirements.txt
 
-ENTRYPOINT ["python3", "-u", "youtube_api.py"]
+CMD ["python3", "-u", "youtube_api.py"]

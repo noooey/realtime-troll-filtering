@@ -9,13 +9,16 @@ config.read('config.ini')
 
 # Get Youtube API key and Video Id
 YOUTUBE_API_KEY = config['youtube']['api_key']
-VIDEO_ID = config['youtube']['video_id']
+
+import os
+video_id = os.getenv('VIDEO_ID')
+kafka_topic = os.getenv('KAFKA_TOPIC')
 
 # Set API key on Pafy
 pafy.set_api_key(YOUTUBE_API_KEY)
 
 # Create the Pychate Instance
-chat = pytchat.create(video_id=VIDEO_ID)
+chat = pytchat.create(video_id=video_id)
 
 # Create a Producer Instance
 producer = KafkaProducer(
@@ -35,7 +38,7 @@ while chat.is_alive():
                 "content": c.message
             }
             print(data)
-            producer.send('youtube_comments', data)
+            producer.send(kafka_topic, data)
     except KeyboardInterrupt:
         chat.terminate()
         break
