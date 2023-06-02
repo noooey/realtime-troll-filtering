@@ -49,6 +49,7 @@ headers = {"Content-Type": "application/json"}
 # Define the function to send a request to the FastAPI endpoint
 def send_request(data):
     response = requests.post(fastapi_url, headers=headers, data=data)
+    print(response)
     return response
 
 

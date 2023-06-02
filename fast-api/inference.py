@@ -95,6 +95,7 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
         # Print the predicted class
         if predicted_class == 1:
             print("hate")
+            input_data.sentence = "*혐오적 표현으로 인해 제재된 댓글입니다.*"
         else:
             print("not hate")
 
