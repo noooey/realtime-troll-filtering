@@ -7,7 +7,7 @@ FROM amd64/python:3.9-slim
 WORKDIR /app
 
 # Copy the application files to the container
-COPY inference.py schema.py requirements.txt ./
+COPY inference.py schema.py requirements.txt logging.conf ./
 
 # Install git
 RUN apt-get update && apt-get install -y git
