@@ -35,10 +35,11 @@
 &nbsp; 
 
 ## Intro
-> 스트리밍 방송에서 실시간으로 발생하는 댓글에 대해 혐오성 여부를 판단하고, 필터링함으로써 댓글 청정도 개선
+스트리밍 방송에서 실시간으로 발생하는 댓글에 대해 혐오성 여부를 판단하고, 필터링함으로써 댓글 청정도 개선
 
 ## Architecture
-![image](https://github.com/noooey/Realtime-Troll-Filtering/assets/66217855/6591f996-f6c2-46f3-aff8-4938250c9747)
+![image](https://github.com/noooey/Realtime-Troll-Filtering/assets/66217855/d0c38c62-01ff-45b0-bb27-684ceb3f8393)
+
 
 ## Data Processing
 ### Environment
