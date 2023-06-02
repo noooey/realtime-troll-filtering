@@ -16,8 +16,8 @@ services:
       dockerfile: Dockerfile
     container_name: kbs-drama
     environment:
-      VIDEO_ID: "d7BbTmUZO-Y"
-      KAFKA_TOPIC: "kbs-drama"
+      VIDEO_ID: "0GN8t2u3flc"
+      KAFKA_TOPIC: "yonhap-news"
 
 networks:
   default:
