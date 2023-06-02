@@ -1,4 +1,3 @@
-from transformers import BertModel, AutoTokenizer
 from fastapi import FastAPI
 import torch
 import torch.nn as nn
@@ -13,18 +12,20 @@ model_name = ["Haaaaeun/kobert_hatespeech",
 '''
 
 ############# KoBERT #############
+# from transformers import BertModel
 # from kobert_tokenizer import KoBERTTokenizer
 # tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
 # model = BertModel.from_pretrained("Haaaaeun/kobert_hatespeech")
 ####################################
 
 ########### SoonsilBERT ###########
+# from transformers import BertModel, AutoTokenizer
 # tokenizer = AutoTokenizer.from_pretrained("Haaaaeun/kcbert_hatespeech")
 # model = BertModel.from_pretrained("Haaaaeun/kcbert_hatespeech")
 ####################################
 
 ########## KoELECTRA ###########
-from transformers import AutoModelForSequenceClassification
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 tokenizer = AutoTokenizer.from_pretrained("Haaaaeun/koELECTRA_hatespeech")
 model = AutoModelForSequenceClassification.from_pretrained("Haaaaeun/koELECTRA_hatespeech")
 ################################
@@ -100,7 +101,7 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
     print(OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class))
     return OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class)
 
-if __name__ == "__main__":
-    # Run FastAPI locally with uvicorn server
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# if __name__ == "__main__":
+#     # Run FastAPI locally with uvicorn server
+#     import uvicorn
+#     uvicorn.run(app, host="127.0.0.1", port=8000)

@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y git
 
 # Install the required packages
 RUN pip install -U pip \
-    && pip install --no-cache-dir -r requirements.txt \ 
-    && pip install 'git+https://github.com/SKTBrain/KOBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf'
+    && pip install --no-cache-dir -r requirements.txt
+    # && pip install 'git+https://github.com/SKTBrain/KOBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf'
 
 # Expose the port for the FastAPI application
 EXPOSE 8000
