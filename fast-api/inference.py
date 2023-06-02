@@ -1,9 +1,18 @@
+import sys
 from fastapi import FastAPI
 import torch
 import torch.nn as nn
 import requests
 requests.get('https://www.huggingface.co')
 from schema import InputSchema, OutputSchema
+
+import logging.config
+
+# 로깅 설정 파일의 경로
+logging_config_file = "/app/logging.conf"
+
+# 로깅 설정 파일 로드
+logging.config.fileConfig(logging_config_file)
 
 '''
 model_name = ["Haaaaeun/kobert_hatespeech",
@@ -37,7 +46,6 @@ classifier = nn.Sequential(
     nn.Linear(768, 1),
     nn.Sigmoid()
 )
-
 
 # Create FastAPI instance
 app = FastAPI()
@@ -94,12 +102,15 @@ def get_inference(input_data: InputSchema) -> OutputSchema:
 
         # Print the predicted class
         if predicted_class == 1:
-            print("hate")
+            # print("hate")
             input_data.sentence = "*혐오적 표현으로 인해 제재된 댓글입니다.*"
         else:
-            print("not hate")
+            pass
+            # print("not hate")
 
-    print(OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class))
+    print(input_data.sentence, file=sys.stderr)
+
+    # print(OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class))
     return OutputSchema(id=input_data.id, sentence=input_data.sentence, result=predicted_class)
 
 # if __name__ == "__main__":
