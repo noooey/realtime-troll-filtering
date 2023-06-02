@@ -41,6 +41,10 @@
 ![image](https://github.com/noooey/Realtime-Troll-Filtering/assets/66217855/6591f996-f6c2-46f3-aff8-4938250c9747)
 
 ## Data Processing
+### Environment
+- Docker
+- EC2
+### Process
 1. 유튜브 댓글 크롤링 라이브러리인 **Pytchat**을 사용하여 라이브 방송의 댓글을 수집하여 Kafka 클러스터로 메세지를 보냅니다.
 2. 메세지들은 해당 방송의 Topic에 적재됩니다.
 3. Spark에서 Topic의 메세지들을 가져와 전처리를 진행합니다.
@@ -74,4 +78,4 @@
   ```
 ---
 
-(학생설계형_팀형) Realtime-Troll-Filtering / ANTI-TROLL Team
+(학생설계형_팀형) Realtime-Troll-Filtering / ANTI-TROLL Team, 2023
