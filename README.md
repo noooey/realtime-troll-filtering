@@ -34,7 +34,49 @@
 
 &nbsp; 
 
+## Intro
+스트리밍 방송에서 실시간으로 발생하는 댓글에 대해 혐오성 여부를 판단하고, 필터링함으로써 댓글 청정도 개선
 
+## Architecture
+![image](https://github.com/noooey/Realtime-Troll-Filtering/assets/66217855/d0c38c62-01ff-45b0-bb27-684ceb3f8393)
+
+
+## Data Processing
+### Environment
+- Docker
+- EC2
+### Process
+1. 유튜브 댓글 크롤링 라이브러리인 **Pytchat**을 사용하여 라이브 방송의 댓글을 수집하여 Kafka 클러스터로 메세지를 보냅니다.
+2. 메세지들은 해당 방송의 Topic에 적재됩니다.
+3. Spark에서 Topic의 메세지들을 가져와 전처리를 진행합니다.
+4. 전처리가 진행된 텍스트를 FastAPI로 요청을 보내 추론 결과를 받아옵니다.
+
+## Models
+### Environment
+- Google Colab Pro+
+
+### Experiments **(수정 중)**
+|     |Train  |Test   |
+|-----|-------|-------|
+|KoBERT|0.0%|0.0%     |
+|SungsilBERT|0.0%|0.0%|
+|KoELECTRA|0.0%|0.0%  |
+
+## Run
+1. Make Youtube Developer Account and prepare API Key.
+2. Create the `config.ini` file as shown below.
+```ini
+  # config.ini
+  [youtube]
+  api_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxx'
+  ```
+
+3. Execute with the following command **(수정 중)**
+
+```shell
+  $ make dependency
+  $ make run
+  ```
 ---
 
-(학생설계형_팀형) Realtime-Troll-Filtering / ANTI-TROLL Team
+(학생설계형_팀형) Realtime-Troll-Filtering / ANTI-TROLL Team, 2023

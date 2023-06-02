@@ -4,5 +4,6 @@ youtube-api:
 youtube-api-clean:
 	docker compose down -v
 	docker rmi -f \
-		youtube-api-kbs-drama \
-		youtube-api-ytn-news
+		youtube-api-yonhap-news \
+		youtube-api-ytn-news \
+		youtube-api-sbs-drama

@@ -10,14 +10,23 @@ services:
       VIDEO_ID: "FJfwehhzIhw"
       KAFKA_TOPIC: "ytn-news"
   
-  kbs-drama:
+  yonhap-news:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: kbs-drama
+    container_name: yonhap-news
     environment:
-      VIDEO_ID: "d7BbTmUZO-Y"
-      KAFKA_TOPIC: "kbs-drama"
+      VIDEO_ID: "0GN8t2u3flc"
+      KAFKA_TOPIC: "yonhap-news"
+  
+  sbs-drama:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sbs-drama
+    environment:
+      VIDEO_ID: "bo9Sl-ACfmc"
+      KAFKA_TOPIC: "sbs-drama"
 
 networks:
   default:
