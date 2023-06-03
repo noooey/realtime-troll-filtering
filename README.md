@@ -59,7 +59,7 @@
 |        |Accuracy|F1   |
 |--------|--------|-----|
 |KoBERT  |0.0%    |0.0% |
-|SungsilBERT|0.0%|0.0%|
+|SoongsilBERT|0.0%|0.0%|
 |KoELECTRA|0.0%|0.0%  |
 
 ## Run
