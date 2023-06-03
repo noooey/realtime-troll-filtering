@@ -56,9 +56,9 @@
 - Google Colab Pro+
 
 ### Experiments **(수정 중)**
-|     |Train  |Test   |
-|-----|-------|-------|
-|KoBERT|0.0%|0.0%     |
+|        |Accuracy|F1   |
+|--------|--------|-----|
+|KoBERT  |0.0%    |0.0% |
 |SungsilBERT|0.0%|0.0%|
 |KoELECTRA|0.0%|0.0%  |
 
