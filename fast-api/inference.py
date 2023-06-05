@@ -17,7 +17,7 @@ logging.config.fileConfig(logging_config_file)
 '''
 model_name = ["Haaaaeun/kobert_hatespeech",
               "Haaaaeun/kcbert_hatespeech",
-              "Haaaaeun/koELECTRA_hatespeech"]
+              "Haaaaeun/koELECTRA_hatespeech_v4"]
 '''
 
 ############# KoBERT #############
@@ -35,8 +35,8 @@ model_name = ["Haaaaeun/kobert_hatespeech",
 
 ########## KoELECTRA ###########
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
-tokenizer = AutoTokenizer.from_pretrained("Haaaaeun/koELECTRA_hatespeech")
-model = AutoModelForSequenceClassification.from_pretrained("Haaaaeun/koELECTRA_hatespeech")
+tokenizer = AutoTokenizer.from_pretrained("Haaaaeun/koELECTRA_hatespeech_v4")
+model = AutoModelForSequenceClassification.from_pretrained("Haaaaeun/koELECTRA_hatespeech_v4")
 ################################
 
 max_seq_length=64
