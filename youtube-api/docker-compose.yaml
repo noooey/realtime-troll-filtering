@@ -1,15 +1,15 @@
 version: "3"
 
 services:
-  # ytn-news:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: ytn-news
-  #   environment:
-  #     VIDEO_ID: "FJfwehhzIhw"
-  #     KAFKA_TOPIC: "ytn-news"
-  
+  ytn-news:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ytn-news
+    environment:
+      VIDEO_ID: "FJfwehhzIhw"
+      KAFKA_TOPIC: "ytn-news"
+
   # yonhap-news:
   #   build:
   #     context: .
@@ -18,15 +18,15 @@ services:
   #   environment:
   #     VIDEO_ID: "0GN8t2u3flc"
   #     KAFKA_TOPIC: "yonhap-news"
-  
-  sbs-drama:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: sbs-drama
-    environment:
-      VIDEO_ID: "bo9Sl-ACfmc"
-      KAFKA_TOPIC: "sbs-drama"
+
+  # sbs-drama:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: sbs-drama
+  #   environment:
+  #     VIDEO_ID: "bo9Sl-ACfmc"
+  #     KAFKA_TOPIC: "sbs-drama"
 
 networks:
   default:

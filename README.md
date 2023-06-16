@@ -60,9 +60,9 @@
 ### Experiments **(수정 중)**
 |        |Accuracy|F1   |
 |--------|--------|-----|
-|KoBERT  |0.0%    |0.0% |
-|SoongsilBERT|0.0%|0.0%|
-|KoELECTRA|0.0%|0.0%  |
+|KoBERT  |0.6205282861896838    |0.6486033083645443 |
+|SoongsilBERT|0.5011299851407767|0.37841276385496414|
+|KoELECTRA|0.8429478475643661|0.8426996114494556  |
 
 ## Run
 1. Make Youtube Developer Account and prepare API Key.
