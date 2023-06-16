@@ -57,12 +57,12 @@
 
 ### Dataset
 
-### Experiments **(수정 중)**
+### Experiments
 |        |Accuracy|F1   |
 |--------|--------|-----|
-|KoBERT  |0.6205282861896838    |0.6486033083645443 |
-|SoongsilBERT|0.5011299851407767|0.37841276385496414|
-|KoELECTRA|0.8429478475643661|0.8426996114494556  |
+|KoBERT  |0.621    |0.649 |
+|SoongsilBERT|0.501|0.378|
+|KoELECTRA|0.843|0.843|
 
 ## Run
 1. Make Youtube Developer Account and prepare API Key.
@@ -79,6 +79,11 @@
   $ make dependency
   $ make run
   ```
+
+## Demo
+
+[[Youtube] 실시간악성댓글필터링 데모영상](https://youtu.be/HnizjnDxcvc)
+
 ---
 
 (학생설계형_팀형) Realtime-Troll-Filtering / ANTI-TROLL Team, 2023
